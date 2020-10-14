@@ -1,2 +1,1 @@
-# LeetCode-Swift
-✅ Solutions to LeetCode by Swift
+# LeetCode in Swift
