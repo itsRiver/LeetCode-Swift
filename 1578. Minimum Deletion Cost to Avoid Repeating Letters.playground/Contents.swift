@@ -6,25 +6,13 @@ import Foundation
 
 func minCost(_ s: String, _ cost: [Int]) -> Int {
     let chars = Array(s)
-    var repeatedLastTime = false
-    var minCost = 0, tempMax = 0
+    var minCost = 0, costArray = cost
     for i in 1..<chars.count {
         if chars[i] == chars[i-1] {
-            if repeatedLastTime {
-                minCost += cost[i]
-                tempMax = max(tempMax, cost[i])
-            } else {
-                minCost += cost[i-1] + cost[i]
-                tempMax = max(cost[i-1], cost[i])
+            minCost += min(costArray[i], costArray[i-1])
+            if costArray[i] < costArray[i-1] {
+                costArray[i] = costArray[i-1]
             }
-            repeatedLastTime = true
-        } else {
-            minCost -= tempMax
-            tempMax = 0
-            repeatedLastTime = false
-        }
-        if i == chars.count-1 {
-            minCost -= tempMax
         }
     }
     return minCost
@@ -32,3 +20,29 @@ func minCost(_ s: String, _ cost: [Int]) -> Int {
 
 let s = "bbbaaa", cost = [4,9,3,8,8,9]
 minCost(s, cost)
+
+//func minCost(_ s: String, _ cost: [Int]) -> Int {
+//    let chars = Array(s)
+//    var repeatedLastTime = false
+//    var minCost = 0, tempMax = 0
+//    for i in 1..<chars.count {
+//        if chars[i] == chars[i-1] {
+//            if repeatedLastTime {
+//                minCost += cost[i]
+//                tempMax = max(tempMax, cost[i])
+//            } else {
+//                minCost += cost[i-1] + cost[i]
+//                tempMax = max(cost[i-1], cost[i])
+//            }
+//            repeatedLastTime = true
+//        } else {
+//            minCost -= tempMax
+//            tempMax = 0
+//            repeatedLastTime = false
+//        }
+//        if i == chars.count-1 {
+//            minCost -= tempMax
+//        }
+//    }
+//    return minCost
+//}
